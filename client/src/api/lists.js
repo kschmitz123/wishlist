@@ -1,29 +1,29 @@
 export async function getLists() {
-  const response = await fetch("http://localhost:5000/lists");
+  const response = await fetch("/api/lists");
   const lists = await response.json();
   return lists;
 }
 export async function getListById(id) {
-  const response = await fetch(`http://localhost:5000/lists/${id}`);
+  const response = await fetch(`/api/lists/${id}`);
   const list = await response.json();
   return list;
 }
 export async function deleteListById(id) {
-  await fetch(`http://localhost:5000/lists/${id}`, {
+  await fetch(`/api/lists/${id}`, {
     method: "DELETE",
   });
 }
-export async function postList(title) {
-  const response = await fetch(`http://localhost:5000/lists/`, {
+export async function postList(data) {
+  const response = await fetch(`/api/lists/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(title),
+    body: JSON.stringify(data),
   });
   const newList = await response.json();
   return newList;
 }
 export async function patchListItem(id, wish) {
-  await fetch(`http://localhost:5000/lists/${id}`, {
+  await fetch(`/api/lists/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
