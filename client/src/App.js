@@ -1,25 +1,26 @@
-import logo from "./logo.svg";
-import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import WishList from "./pages/WishList";
+import GlobalStyle from "./GlobalStyle";
+import Add from "./pages/Add";
+import Welcome from "./pages/Welcome";
 import React from "react";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <GlobalStyle />
+      <Switch>
+        <Route exact path="/">
+          <Welcome />
+        </Route>
+        <Route path="/add">
+          <Add />
+        </Route>
+        <Route path="/wishlist/:listId">
+          <WishList />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
