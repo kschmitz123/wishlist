@@ -35,7 +35,7 @@ const Add = () => {
     try {
       setLoading(true);
       setErrorMessage(null);
-      const newList = await postList({ title, wishes });
+      const newList = await postList({ name: title, wishes: wishes });
       setLoading(false);
       history.push(`/wishlist/${newList.id}`);
     } catch (error) {
