@@ -1,27 +1,23 @@
 import { Link, useHistory, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "react-query";
 import FloatingActionButton from "../components/Button";
 import Container from "../components/Container";
 import { getListById, deleteListById, patchListItem } from "../api/lists";
 import WishListItem from "../components/WishListItem";
 import BackArrow from "../assets/back-arrow.png";
 import DangerButton from "../components/DangerButton";
+import ErrorMessage from "../components/ErrorMessage";
 import Form from "../components/Form";
 import React from "react";
 
 const WishList = () => {
   const { listId } = useParams();
   const history = useHistory();
-  const [list, setList] = useState("");
   const [wishToAdd, setWishToAdd] = useState("");
-
-  useEffect(() => {
-    async function fetchData() {
-      const newList = await getListById(listId);
-      setList(newList);
-    }
-    fetchData();
-  }, [listId]);
+  const { data, status } = useQuery(["lists", listId], () =>
+    getListById(listId)
+  );
 
   const handleDelete = async () => {
     await deleteListById(listId);
@@ -36,9 +32,12 @@ const WishList = () => {
 
   return (
     <Container>
-      <h1>Wishlist for: {list?.name}</h1>
+      {status === "loading" && <div>Loading...</div>}
+      {status === "error" && <ErrorMessage>Error fetching list</ErrorMessage>}
+
+      <h1>Wishlist for: {data?.name}</h1>
       <li>
-        {list.wishes?.map((wish, index) => (
+        {data?.wishes.map((wish, index) => (
           <WishListItem key={index} title={wish} />
         ))}
       </li>
