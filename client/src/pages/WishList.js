@@ -1,6 +1,6 @@
 import { Link, useHistory, useParams } from "react-router-dom";
-import { useState } from "react";
-import { useQuery } from "react-query";
+import React, { useState } from "react";
+import { useQuery, useMutation } from "react-query";
 import FloatingActionButton from "../components/Button";
 import Container from "../components/Container";
 import { getListById, deleteListById, patchListItem } from "../api/lists";
@@ -9,7 +9,6 @@ import BackArrow from "../assets/back-arrow.png";
 import DangerButton from "../components/DangerButton";
 import ErrorMessage from "../components/ErrorMessage";
 import Form from "../components/Form";
-import React from "react";
 
 const WishList = () => {
   const { listId } = useParams();
@@ -18,13 +17,19 @@ const WishList = () => {
   const { data, status } = useQuery(["lists", listId], () =>
     getListById(listId)
   );
+  const mutation = useMutation(() => {
+    patchListItem({
+      id: listId,
+      wish: wishToAdd,
+    });
+  });
 
   const handleDelete = async () => {
     await deleteListById(listId);
     history.push("/");
   };
   const handleSubmit = async () => {
-    patchListItem({ id: listId, wish: wishToAdd });
+    mutation.mutate({ listId, wishToAdd });
   };
   const handleChange = (event) => {
     setWishToAdd(event.target.value);
