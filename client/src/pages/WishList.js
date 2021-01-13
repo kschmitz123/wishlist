@@ -45,7 +45,7 @@ const WishList = () => {
 
   return (
     <Container>
-      <Heading>Wishlist for: {list?.title}</Heading>
+      <Heading>Wishlist for: {list?.name}</Heading>
       <li>
         {list.wishes?.map((wish, index) => (
           <WishListItem key={index} title={wish} />
