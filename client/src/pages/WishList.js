@@ -49,7 +49,7 @@ const WishList = () => {
           onChange={handleChange}
           required
         />
-        <input type="submit" value="Add" />
+        <button type="submit">Add</button>
       </Form>
       <DangerButton onClick={handleDelete} type="button">
         Delete

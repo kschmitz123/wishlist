@@ -50,7 +50,9 @@ const Add = () => {
           value={wishes}
           placeholder="Insert Wishes here: Wish 1, Wish 2, ..."
         />
-        <input type="submit" value="Add" disabled={loading} />
+        <button type="submit" disabled={loading}>
+          Add
+        </button>
       </Form>
       {loading && <div>Loading...</div>}
       {errorMessage && <p>{errorMessage}</p>}
