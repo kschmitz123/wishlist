@@ -18,6 +18,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
+
+  h1 {
+    color: white;
+  }
 `;
 
 export default GlobalStyle;

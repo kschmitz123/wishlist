@@ -10,10 +10,6 @@ import DangerButton from "../components/DangerButton";
 import Form from "../components/Form";
 import React from "react";
 
-const Heading = styled.h1`
-  color: white;
-`;
-
 const WishList = () => {
   const { listId } = useParams();
   const history = useHistory();
@@ -41,7 +37,7 @@ const WishList = () => {
 
   return (
     <Container>
-      <Heading>Wishlist for: {list?.name}</Heading>
+      <h1>Wishlist for: {list?.name}</h1>
       <li>
         {list.wishes?.map((wish, index) => (
           <WishListItem key={index} title={wish} />

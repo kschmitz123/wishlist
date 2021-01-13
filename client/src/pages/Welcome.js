@@ -8,10 +8,6 @@ import Container from "../components/Container";
 import React from "react";
 import WishlistPreview from "../components/WishlistPreview";
 
-const Heading = styled.h1`
-  color: white;
-`;
-
 const ErrorMessage = styled.div`
   background: white;
 `;
@@ -46,7 +42,7 @@ const Welcome = () => {
 
   return (
     <Container>
-      <Heading>Christmas Wishlist</Heading>
+      <h1>Christmas Wishlist</h1>
       {lists?.map((list) => (
         <WishlistPreview key={list._id}>
           <Link to={`/wishlist/${list._id}`}>
