@@ -47,8 +47,8 @@ const WishList = () => {
     <Container>
       <Heading>Wishlist for: {list?.title}</Heading>
       <li>
-        {list.wishes?.map((wish) => (
-          <WishListItem key={wish} title={wish} />
+        {list.wishes?.map((wish, index) => (
+          <WishListItem key={index} title={wish} />
         ))}
       </li>
       <Form onSubmit={handleSubmit}>
