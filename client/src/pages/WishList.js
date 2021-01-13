@@ -6,6 +6,7 @@ import { getListById, deleteListById, patchListItem } from "../api/lists";
 import WishListItem from "../components/WishListItem";
 import BackArrow from "../assets/back-arrow.png";
 import DangerButton from "../components/DangerButton";
+import Form from "../components/Form";
 import React from "react";
 
 const Container = styled.div`
@@ -14,10 +15,7 @@ const Container = styled.div`
 const Heading = styled.h1`
   color: white;
 `;
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
+
 const WishList = () => {
   const { listId } = useParams();
   const history = useHistory();
