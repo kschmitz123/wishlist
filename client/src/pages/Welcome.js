@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
 import { deleteListById, getLists } from "../api/lists";
 import WishListItem from "../components/WishListItem";
@@ -7,10 +6,7 @@ import FloatingActionButton from "../components/Button";
 import Container from "../components/Container";
 import React from "react";
 import WishlistPreview from "../components/WishlistPreview";
-
-const ErrorMessage = styled.div`
-  background: white;
-`;
+import ErrorMessage from "../components/ErrorMessage";
 
 const Welcome = () => {
   const [lists, setLists] = useState([]);
