@@ -1,23 +1,14 @@
 import { Link, useHistory, useParams } from "react-router-dom";
-import styled from "styled-components";
 import { useEffect, useState } from "react";
 import FloatingActionButton from "../components/Button";
+import Container from "../components/Container";
 import { getListById, deleteListById, patchListItem } from "../api/lists";
 import WishListItem from "../components/WishListItem";
 import BackArrow from "../assets/back-arrow.png";
 import DangerButton from "../components/DangerButton";
+import Form from "../components/Form";
 import React from "react";
 
-const Container = styled.div`
-  text-align: center;
-`;
-const Heading = styled.h1`
-  color: white;
-`;
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
 const WishList = () => {
   const { listId } = useParams();
   const history = useHistory();
@@ -45,7 +36,7 @@ const WishList = () => {
 
   return (
     <Container>
-      <Heading>Wishlist for: {list?.name}</Heading>
+      <h1>Wishlist for: {list?.name}</h1>
       <li>
         {list.wishes?.map((wish, index) => (
           <WishListItem key={index} title={wish} />
@@ -58,7 +49,7 @@ const WishList = () => {
           onChange={handleChange}
           required
         />
-        <input type="submit" value="Add" />
+        <button type="submit">Add</button>
       </Form>
       <DangerButton onClick={handleDelete} type="button">
         Delete

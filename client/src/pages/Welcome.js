@@ -1,45 +1,12 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
 import { deleteListById, getLists } from "../api/lists";
 import WishListItem from "../components/WishListItem";
 import FloatingActionButton from "../components/Button";
+import Container from "../components/Container";
 import React from "react";
-
-const Container = styled.div`
-  text-align: center;
-`;
-const ListItem = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-const Button = styled.button`
-  background: radial-gradient(
-    circle,
-    rgba(238, 238, 238, 1) 33%,
-    rgba(227, 41, 41, 1) 100%
-  );
-  width: 40px;
-  height: 40px;
-  border-radius: 25px;
-  border: none;
-  position: relative;
-  margin-left: -30px;
-`;
-const Heading = styled.h1`
-  color: white;
-`;
-const NavLink = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-  &:visited {
-    color: black;
-  }
-`;
-const ErrorMessage = styled.div`
-  background: white;
-`;
+import WishlistPreview from "../components/WishlistPreview";
+import ErrorMessage from "../components/ErrorMessage";
 
 const Welcome = () => {
   const [lists, setLists] = useState([]);
@@ -71,16 +38,16 @@ const Welcome = () => {
 
   return (
     <Container>
-      <Heading>Christmas Wishlist</Heading>
+      <h1>Christmas Wishlist</h1>
       {lists?.map((list) => (
-        <ListItem key={list._id}>
-          <NavLink to={`/wishlist/${list._id}`}>
+        <WishlistPreview key={list._id}>
+          <Link to={`/wishlist/${list._id}`}>
             <WishListItem title={list.name} />
-          </NavLink>
-          <Button type="button" onClick={() => handleDelete(list._id)}>
+          </Link>
+          <button type="button" onClick={() => handleDelete(list._id)}>
             🗑
-          </Button>
-        </ListItem>
+          </button>
+        </WishlistPreview>
       ))}
       {loading && <div>Loading...</div>}
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
