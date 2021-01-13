@@ -5,6 +5,9 @@ const WishlistPreview = styled.div`
   a {
     text-decoration: none;
     cursor: pointer;
+    :visited {
+      color: black;
+    }
   }
 
   button {
