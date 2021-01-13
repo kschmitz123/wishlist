@@ -24,20 +24,23 @@ const WishList = () => {
   const [list, setList] = useState("");
   const [wishToAdd, setWishToAdd] = useState("");
 
-  useEffect(async () => {
-    const newList = await getListById(listId);
-    setList(newList);
-  }, []);
+  useEffect(() => {
+    async function fetchData() {
+      const newList = await getListById(listId);
+      setList(newList);
+    }
+    fetchData();
+  }, [listId]);
 
   const handleDelete = async () => {
     await deleteListById(listId);
     history.push("/");
   };
   const handleSubmit = async () => {
-    patchListItem(listId, wishToAdd);
+    patchListItem({ id: listId, wish: wishToAdd });
   };
   const handleChange = (event) => {
-    setWishToAdd([...list.wishes, event.target.value]);
+    setWishToAdd(event.target.value);
   };
 
   return (

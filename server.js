@@ -2,7 +2,11 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const { connect } = require("./lib/database");
-const { setWishlist, getWishlistById } = require("./lib/wishlists");
+const {
+  setWishlist,
+  getWishlistById,
+  updateWishlist,
+} = require("./lib/wishlists");
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -13,6 +17,18 @@ app.post("/api/lists/", async (request, response) => {
   const wishlist = request.body;
   try {
     const insertResult = await setWishlist(wishlist);
+    const newWishlistId = insertResult.insertedId;
+    response.status(200).json(newWishlistId);
+  } catch (error) {
+    console.error(error);
+    response.status(500).send("An internal server error occured");
+  }
+});
+
+app.post("/api/wishlist/", async (request, response) => {
+  const data = request.body;
+  try {
+    const insertResult = await updateWishlist(data);
     const newWishlistId = insertResult.insertedId;
     response.status(200).json(newWishlistId);
   } catch (error) {
