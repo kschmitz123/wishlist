@@ -50,15 +50,18 @@ const Welcome = () => {
     const newLists = await getLists();
     setLists(newLists);
   }
-  useEffect(async () => {
-    try {
-      setLoading(true);
-      setErrorMessage(null);
-      await refreshLists(setLists);
-      setLoading(false);
-    } catch (error) {
-      setErrorMessage(error.message);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        setErrorMessage(null);
+        await refreshLists(setLists);
+        setLoading(false);
+      } catch (error) {
+        setErrorMessage(error.message);
+      }
     }
+    fetchData();
   }, []);
 
   const handleDelete = async (listId) => {
@@ -70,9 +73,9 @@ const Welcome = () => {
     <Container>
       <Heading>Christmas Wishlist</Heading>
       {lists?.map((list) => (
-        <ListItem key={list.id}>
-          <NavLink to={`/wishlist/${list.id}`}>
-            <WishListItem title={list.title} />
+        <ListItem key={list._id}>
+          <NavLink to={`/wishlist/${list._id}`}>
+            <WishListItem title={list.name} />
           </NavLink>
           <Button type="button" onClick={() => handleDelete(list.id)}>
             🗑
