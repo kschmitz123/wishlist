@@ -2,19 +2,12 @@ import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import FloatingActionButton from "../components/Button";
+import Form from "../components/Form";
+import Container from "../components/Container";
 import BackArrow from "../assets/back-arrow.png";
 import { postList } from "../api/lists";
 import React from "react";
 
-const Container = styled.div`
-  background: #edf0ed;
-  margin: 30px;
-  text-align: center;
-`;
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
 const Add = () => {
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
