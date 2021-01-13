@@ -6,6 +6,7 @@ const {
   setWishlist,
   getWishlistById,
   updateWishlist,
+  getWishlists,
 } = require("./lib/wishlists");
 
 const app = express();
@@ -19,6 +20,17 @@ app.post("/api/lists/", async (request, response) => {
     const insertResult = await setWishlist(wishlist);
     const newWishlistId = insertResult.insertedId;
     response.status(200).json(newWishlistId);
+  } catch (error) {
+    console.error(error);
+    response.status(500).send("An internal server error occured");
+  }
+});
+
+app.get("/api/lists/", async (request, response) => {
+  const { lists } = request.params;
+  try {
+    const listCollection = await getWishlists(lists);
+    response.send(listCollection);
   } catch (error) {
     console.error(error);
     response.status(500).send("An internal server error occured");
