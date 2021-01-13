@@ -5,13 +5,18 @@ import Form from "../components/Form";
 import Container from "../components/Container";
 import BackArrow from "../assets/back-arrow.png";
 import { useMutation } from "react-query";
-import { createList } from "../helpers/createList";
+import { postList } from "../api/lists";
 
 const Add = () => {
   const [title, setTitle] = useState("");
   const history = useHistory();
   const [wishes, setWishes] = useState([]);
-  const mutation = useMutation(createList);
+  const mutation = useMutation(() =>
+    postList({
+      name: title,
+      wishes: wishes,
+    })
+  );
 
   const handleChange = (event) => {
     setTitle(event.target.value);
