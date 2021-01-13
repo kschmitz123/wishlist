@@ -77,7 +77,7 @@ const Welcome = () => {
           <NavLink to={`/wishlist/${list._id}`}>
             <WishListItem title={list.name} />
           </NavLink>
-          <Button type="button" onClick={() => handleDelete(list.id)}>
+          <Button type="button" onClick={() => handleDelete(list._id)}>
             🗑
           </Button>
         </ListItem>

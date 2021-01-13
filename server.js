@@ -7,6 +7,7 @@ const {
   getWishlistById,
   updateWishlist,
   getWishlists,
+  deleteWishlistById,
 } = require("./lib/wishlists");
 
 const app = express();
@@ -54,6 +55,17 @@ app.get("/api/lists/:id", async (request, response) => {
   try {
     const wishlist = await getWishlistById(id);
     response.send(wishlist);
+  } catch (error) {
+    console.error(error);
+    response.status(500).send("An internal server error occured");
+  }
+});
+
+app.delete("/api/lists/:id", async (request, response) => {
+  const { id } = request.params;
+  try {
+    await deleteWishlistById(id);
+    response.status(200).send();
   } catch (error) {
     console.error(error);
     response.status(500).send("An internal server error occured");
