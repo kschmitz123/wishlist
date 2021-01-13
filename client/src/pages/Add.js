@@ -1,37 +1,33 @@
 import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 import FloatingActionButton from "../components/Button";
 import Form from "../components/Form";
 import Container from "../components/Container";
 import BackArrow from "../assets/back-arrow.png";
-import { postList } from "../api/lists";
-import React from "react";
+import { useMutation } from "react-query";
+import { createList } from "../helpers/createList";
 
 const Add = () => {
   const [title, setTitle] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
   const history = useHistory();
   const [wishes, setWishes] = useState([]);
+  const mutation = useMutation(createList);
 
   const handleChange = (event) => {
     setTitle(event.target.value);
   };
+
   const handleWishChange = (event) => {
     setWishes(event.target.value.split(","));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
-      setLoading(true);
-      setErrorMessage(null);
-      const newList = await postList({ name: title, wishes: wishes });
-      setLoading(false);
+      const newList = await mutation.mutateAsync({ title, wishes });
       history.push(`/wishlist/${newList}`);
     } catch (error) {
-      setErrorMessage(error.message);
+      console.error(error);
     }
   };
   return (
@@ -50,12 +46,10 @@ const Add = () => {
           value={wishes}
           placeholder="Insert Wishes here: Wish 1, Wish 2, ..."
         />
-        <button type="submit" disabled={loading}>
-          Add
-        </button>
+        <button type="submit">Add</button>
       </Form>
-      {loading && <div>Loading...</div>}
-      {errorMessage && <p>{errorMessage}</p>}
+      {mutation.isLoading && <div>Loading...</div>}
+      {mutation.isError && <p>{mutation.error.message}</p>}
       <Link to="/">
         <FloatingActionButton>
           <img src={BackArrow} alt="back" />
