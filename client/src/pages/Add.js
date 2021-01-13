@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import FloatingActionButton from "../components/Button";

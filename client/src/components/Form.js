@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const Form = styled.form`
   display: flex;
@@ -8,6 +8,7 @@ const Form = styled.form`
     height: 2.5rem;
     border-radius: 25px;
     margin-bottom: 10px;
+    border: none;
   }
 `;
 export default Form;
