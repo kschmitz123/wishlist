@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { deleteListById, getLists } from "../api/lists";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import WishListItem from "../components/WishListItem";
 import FloatingActionButton from "../components/Button";
 import Container from "../components/Container";
@@ -10,9 +10,11 @@ import ErrorMessage from "../components/ErrorMessage";
 
 const Welcome = () => {
   const { data, status } = useQuery("lists", getLists);
-
+  const mutation = useMutation((listId) => {
+    deleteListById(listId);
+  });
   const handleDelete = async (listId) => {
-    await deleteListById(listId);
+    mutation.mutate(listId);
     window.location.reload();
   };
 
