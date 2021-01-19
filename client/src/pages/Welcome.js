@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteListById, getLists } from "../api/lists";
+import { useMutation, useQuery } from "react-query";
 import WishListItem from "../components/WishListItem";
 import FloatingActionButton from "../components/Button";
 import Container from "../components/Container";
@@ -9,37 +9,19 @@ import WishlistPreview from "../components/WishlistPreview";
 import ErrorMessage from "../components/ErrorMessage";
 
 const Welcome = () => {
-  const [lists, setLists] = useState([]);
-  const [errorMessage, setErrorMessage] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  async function refreshLists() {
-    const newLists = await getLists();
-    setLists(newLists);
-  }
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        setErrorMessage(null);
-        await refreshLists(setLists);
-        setLoading(false);
-      } catch (error) {
-        setErrorMessage(error.message);
-      }
-    }
-    fetchData();
-  }, []);
-
+  const { data, status } = useQuery("lists", getLists);
+  const mutation = useMutation((listId) => {
+    deleteListById(listId);
+  });
   const handleDelete = async (listId) => {
-    await deleteListById(listId);
-    await refreshLists();
+    mutation.mutate(listId);
+    window.location.reload();
   };
 
   return (
     <Container>
       <h1>Christmas Wishlist</h1>
-      {lists?.map((list) => (
+      {data?.map((list) => (
         <WishlistPreview key={list._id}>
           <Link to={`/wishlist/${list._id}`}>
             <WishListItem title={list.name} />
@@ -49,8 +31,8 @@ const Welcome = () => {
           </button>
         </WishlistPreview>
       ))}
-      {loading && <div>Loading...</div>}
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {status === "loading" && <div>Loading...</div>}
+      {status === "error" && <ErrorMessage>Error fetching lists</ErrorMessage>}
       <Link to="/add">
         <FloatingActionButton>
           <svg
