@@ -11,18 +11,20 @@ import { useForm } from "react-hook-form";
 const Add = () => {
   const { register, handleSubmit } = useForm();
   const history = useHistory();
-  const mutation = useMutation(({ title, wishes }) =>
+  const mutation = useMutation(({ title, wishes, theme }) =>
     postList({
       name: title,
       wishes: wishes,
+      theme: theme,
     })
   );
 
   const onSubmit = async (data) => {
     const wishes = data.wishes.split(",");
-    const { title } = data;
+    const { title, theme } = data;
+    console.log(theme);
     try {
-      const newList = await mutation.mutateAsync({ title, wishes });
+      const newList = await mutation.mutateAsync({ title, wishes, theme });
       history.push(`/wishlist/${newList}`);
     } catch (error) {
       console.error(error);
@@ -44,10 +46,10 @@ const Add = () => {
           ref={register}
           name="wishes"
         />
-        <select name="theme" aria-label={"Select theme"}>
+        <select ref={register} name="theme" aria-label={"Select theme"}>
           <option value="">--Please choose a theme--</option>
-          <option value="sewing">Christmas</option>
-          <option value="macrame">Birthday</option>
+          <option value="christmas">Christmas</option>
+          <option value="birthday">Birthday</option>
         </select>
         <button type="submit">Add</button>
       </Form>
