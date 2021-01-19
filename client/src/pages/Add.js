@@ -7,6 +7,7 @@ import BackArrow from "../assets/back-arrow.png";
 import { useMutation } from "react-query";
 import { postList } from "../api/lists";
 import { useForm } from "react-hook-form";
+import { theme } from "../GlobalStyle";
 
 const Add = () => {
   const { register, handleSubmit } = useForm();
@@ -31,7 +32,7 @@ const Add = () => {
     }
   };
   return (
-    <Container>
+    <Container style={{ background: theme.background.standard }}>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <input
           placeholder="Add name"
