@@ -54,7 +54,7 @@ app.get("/api/lists/:id", async (request, response) => {
   const { id } = request.params;
   try {
     const wishlist = await getWishlistById(id);
-    response.send(wishlist);
+    response.status(200).send(wishlist);
   } catch (error) {
     console.error(error);
     response.status(500).send("An internal server error occured");
