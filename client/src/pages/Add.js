@@ -1,33 +1,26 @@
 import { Link, useHistory } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
 import FloatingActionButton from "../components/Button";
 import Form from "../components/Form";
 import Container from "../components/Container";
 import BackArrow from "../assets/back-arrow.png";
 import { useMutation } from "react-query";
 import { postList } from "../api/lists";
+import { useForm } from "react-hook-form";
 
 const Add = () => {
-  const [title, setTitle] = useState("");
+  const { register, handleSubmit } = useForm();
   const history = useHistory();
-  const [wishes, setWishes] = useState([]);
-  const mutation = useMutation(() =>
+  const mutation = useMutation(({ title, wishes }) =>
     postList({
       name: title,
       wishes: wishes,
     })
   );
 
-  const handleChange = (event) => {
-    setTitle(event.target.value);
-  };
-
-  const handleWishChange = (event) => {
-    setWishes(event.target.value.split(","));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const onSubmit = async (data) => {
+    const wishes = data.wishes.split(",");
+    const { title } = data;
     try {
       const newList = await mutation.mutateAsync({ title, wishes });
       history.push(`/wishlist/${newList}`);
@@ -37,19 +30,19 @@ const Add = () => {
   };
   return (
     <Container>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <input
           placeholder="Add name"
           type="text"
-          value={title}
-          onChange={handleChange}
           required
+          ref={register}
+          name="title"
         />
         <input
           type="text"
-          onChange={handleWishChange}
-          value={wishes}
           placeholder="Insert Wishes here: Wish 1, Wish 2, ..."
+          ref={register}
+          name="wishes"
         />
         <select name="theme" aria-label={"Select theme"}>
           <option value="">--Please choose a theme--</option>
