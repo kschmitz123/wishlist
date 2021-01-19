@@ -51,6 +51,11 @@ const Add = () => {
           value={wishes}
           placeholder="Insert Wishes here: Wish 1, Wish 2, ..."
         />
+        <select name="theme" aria-label={"Select theme"}>
+          <option value="">--Please choose a theme--</option>
+          <option value="sewing">Christmas</option>
+          <option value="macrame">Birthday</option>
+        </select>
         <button type="submit">Add</button>
       </Form>
       {mutation.isLoading && <div>Loading...</div>}
