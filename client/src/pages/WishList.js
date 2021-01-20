@@ -1,5 +1,5 @@
 import { Link, useHistory, useParams } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, useMutation } from "react-query";
 import FloatingActionButton from "../components/Button";
 import Container from "../components/Container";
@@ -9,14 +9,25 @@ import BackArrow from "../assets/back-arrow.png";
 import DangerButton from "../components/DangerButton";
 import ErrorMessage from "../components/ErrorMessage";
 import Form from "../components/Form";
+import { theme } from "../GlobalStyle";
 
 const WishList = () => {
   const { listId } = useParams();
   const history = useHistory();
+  const [background, setBackground] = useState("");
   const [wishToAdd, setWishToAdd] = useState("");
   const { data, status } = useQuery(["lists", listId], () =>
     getListById(listId)
   );
+
+  useEffect(() => {
+    if (data?.theme === "christmas") {
+      setBackground(theme.background.christmas);
+    } else {
+      setBackground(theme.background.birthday);
+    }
+  }, [data]);
+
   const mutation = useMutation(() => {
     patchListItem({
       id: listId,
@@ -36,7 +47,11 @@ const WishList = () => {
   };
 
   return (
-    <Container>
+    <Container
+      style={{
+        background: background,
+      }}
+    >
       {status === "loading" && <div>Loading...</div>}
       {status === "error" && <ErrorMessage>Error fetching list</ErrorMessage>}
 

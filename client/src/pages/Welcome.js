@@ -7,6 +7,7 @@ import Container from "../components/Container";
 import React from "react";
 import WishlistPreview from "../components/WishlistPreview";
 import ErrorMessage from "../components/ErrorMessage";
+import { theme } from "../GlobalStyle";
 
 const Welcome = () => {
   const { data, status } = useQuery("lists", getLists);
@@ -19,7 +20,7 @@ const Welcome = () => {
   };
 
   return (
-    <Container>
+    <Container style={{ background: theme.background.standard }}>
       <h1>Christmas Wishlist</h1>
       {data?.map((list) => (
         <WishlistPreview key={list._id}>
