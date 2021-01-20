@@ -9,6 +9,7 @@ const Form = styled.form`
   button,
   select {
     height: 2.5rem;
+    font-size: 1rem;
     border-radius: 25px;
     margin-bottom: 10px;
     border: none;
