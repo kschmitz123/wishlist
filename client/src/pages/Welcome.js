@@ -3,7 +3,7 @@ import { deleteListById, getLists } from "../api/lists";
 import { useMutation, useQuery } from "react-query";
 import WishListItem from "../components/WishListItem";
 import FloatingActionButton from "../components/Button";
-import Container from "../components/Container";
+import Wrapper from "../components/Wrapper";
 import React from "react";
 import WishlistPreview from "../components/WishlistPreview";
 import ErrorMessage from "../components/ErrorMessage";
@@ -20,7 +20,7 @@ const Welcome = () => {
   };
 
   return (
-    <Container style={{ background: theme.background.standard }}>
+    <Wrapper style={{ background: theme.background.standard }}>
       <h1>Christmas Wishlist</h1>
       {data?.map((list) => (
         <WishlistPreview key={list._id}>
@@ -46,7 +46,7 @@ const Welcome = () => {
           </svg>
         </FloatingActionButton>
       </Link>
-    </Container>
+    </Wrapper>
   );
 };
 

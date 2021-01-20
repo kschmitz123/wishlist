@@ -2,7 +2,7 @@ import { Link, useHistory } from "react-router-dom";
 import React from "react";
 import FloatingActionButton from "../components/Button";
 import Form from "../components/Form";
-import Container from "../components/Container";
+import Wrapper from "../components/Wrapper";
 import BackArrow from "../assets/back-arrow.png";
 import { useMutation } from "react-query";
 import { postList } from "../api/lists";
@@ -32,7 +32,7 @@ const Add = () => {
     }
   };
   return (
-    <Container style={{ background: theme.background.standard }}>
+    <Wrapper style={{ background: theme.background.standard }}>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <input
           placeholder="Add name"
@@ -61,7 +61,7 @@ const Add = () => {
           <img src={BackArrow} alt="back" />
         </FloatingActionButton>
       </Link>
-    </Container>
+    </Wrapper>
   );
 };
 export default Add;

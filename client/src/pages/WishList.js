@@ -2,7 +2,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useQuery, useMutation } from "react-query";
 import FloatingActionButton from "../components/Button";
-import Container from "../components/Container";
+import Wrapper from "../components/Wrapper";
 import { getListById, deleteListById, patchListItem } from "../api/lists";
 import WishListItem from "../components/WishListItem";
 import BackArrow from "../assets/back-arrow.png";
@@ -47,7 +47,7 @@ const WishList = () => {
   };
 
   return (
-    <Container
+    <Wrapper
       style={{
         background: background,
       }}
@@ -78,7 +78,7 @@ const WishList = () => {
           <img src={BackArrow} alt="back" />
         </FloatingActionButton>
       </Link>
-    </Container>
+    </Wrapper>
   );
 };
 export default WishList;
