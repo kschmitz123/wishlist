@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
-import ChristmasBackground from "./assets/background_christmas.jpeg";
-import BirthdayBackground from "./assets/background_birthday.jpg";
+import ChristmasBackground from "./assets/background_christmas_mobile.jpeg";
+import BirthdayBackground from "./assets/background_birthday_mobile.jpg";
 
 export const theme = {
   background: {
