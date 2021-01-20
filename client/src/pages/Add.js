@@ -55,7 +55,9 @@ const Add = () => {
             <option value="christmas">Christmas</option>
             <option value="birthday">Birthday</option>
           </select>
-          <button type="submit">Add</button>
+          <button style={{ background: "#de9106" }} type="submit">
+            Add
+          </button>
         </Form>
         {mutation.isLoading && <div>Loading...</div>}
         {mutation.isError && <p>{mutation.error.message}</p>}
