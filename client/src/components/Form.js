@@ -15,6 +15,8 @@ const Form = styled.form`
   }
   button {
     background: #e48585;
+    margin-top: 10px;
   }
 `;
+
 export default Form;
