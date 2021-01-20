@@ -6,7 +6,8 @@ const Form = styled.form`
   padding-top: 20px;
 
   input,
-  button {
+  button,
+  select {
     height: 2.5rem;
     border-radius: 25px;
     margin-bottom: 10px;
