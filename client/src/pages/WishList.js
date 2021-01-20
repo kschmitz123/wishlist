@@ -56,11 +56,11 @@ const WishList = () => {
       {status === "error" && <ErrorMessage>Error fetching list</ErrorMessage>}
 
       <h1>Wishlist for: {data?.name}</h1>
-      <li>
+      <p>
         {data?.wishes.map((wish, index) => (
           <WishListItem key={index} title={wish} />
         ))}
-      </li>
+      </p>
       <Form onSubmit={handleSubmit}>
         <input
           placeholder="Add wish"
