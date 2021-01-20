@@ -5,7 +5,7 @@ import React from "react";
 const Wrapper = styled.div`
   margin: 10px;
   font-size: 2rem;
-  background: #edf0ed;
+  background: #fff;
   text-align: center;
   border-radius: 25px;
 `;
