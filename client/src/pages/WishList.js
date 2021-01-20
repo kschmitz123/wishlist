@@ -10,11 +10,13 @@ import DangerButton from "../components/DangerButton";
 import ErrorMessage from "../components/ErrorMessage";
 import Form from "../components/Form";
 import { theme } from "../GlobalStyle";
+import Container from "../components/Container";
 
 const WishList = () => {
   const { listId } = useParams();
   const history = useHistory();
   const [background, setBackground] = useState("");
+  const [backgroundColor, setBackgroundColor] = useState("");
   const [wishToAdd, setWishToAdd] = useState("");
   const { data, status } = useQuery(["lists", listId], () =>
     getListById(listId)
@@ -23,8 +25,10 @@ const WishList = () => {
   useEffect(() => {
     if (data?.theme === "christmas") {
       setBackground(theme.background.christmas);
+      setBackgroundColor(theme.backgroundColor.christmas);
     } else {
       setBackground(theme.background.birthday);
+      setBackgroundColor(theme.backgroundColor.birthday);
     }
   }, [data]);
 
@@ -52,32 +56,34 @@ const WishList = () => {
         background: background,
       }}
     >
-      {status === "loading" && <div>Loading...</div>}
-      {status === "error" && <ErrorMessage>Error fetching list</ErrorMessage>}
+      <Container style={{ backgroundColor: backgroundColor }}>
+        {status === "loading" && <div>Loading...</div>}
+        {status === "error" && <ErrorMessage>Error fetching list</ErrorMessage>}
 
-      <h1>Wishlist for: {data?.name}</h1>
-      <p>
-        {data?.wishes.map((wish, index) => (
-          <WishListItem key={index} title={wish} />
-        ))}
-      </p>
-      <Form onSubmit={handleSubmit}>
-        <input
-          placeholder="Add wish"
-          type="text"
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Add</button>
-      </Form>
-      <DangerButton onClick={handleDelete} type="button">
-        Delete
-      </DangerButton>
-      <Link to="/">
-        <FloatingActionButton>
-          <img src={BackArrow} alt="back" />
-        </FloatingActionButton>
-      </Link>
+        <h1>Wishlist for: {data?.name}</h1>
+        <p>
+          {data?.wishes.map((wish, index) => (
+            <WishListItem key={index} title={wish} />
+          ))}
+        </p>
+        <Form onSubmit={handleSubmit}>
+          <input
+            placeholder="Add wish"
+            type="text"
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">Add</button>
+        </Form>
+        <DangerButton onClick={handleDelete} type="button">
+          Delete
+        </DangerButton>
+        <Link to="/">
+          <FloatingActionButton>
+            <img src={BackArrow} alt="back" />
+          </FloatingActionButton>
+        </Link>
+      </Container>
     </Wrapper>
   );
 };

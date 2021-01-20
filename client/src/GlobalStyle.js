@@ -8,6 +8,10 @@ export const theme = {
     christmas: `url(${ChristmasBackground}) no-repeat center center fixed`,
     birthday: `url(${BirthdayBackground}) no-repeat center center fixed`,
   },
+  backgroundColor: {
+    christmas: "#213d5f",
+    birthday: "#cecdcc",
+  },
 };
 
 const GlobalStyle = createGlobalStyle`
