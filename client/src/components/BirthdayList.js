@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
 import BirthdayBackground from "../assets/background_birthday_mobile.jpg";
-import Container from "../components/Container";
-import Wrapper from "../components/Wrapper";
+import Container from "./Container";
+import Wrapper from "./Wrapper";
 
 export default function BirthdayList({ children }) {
   return (

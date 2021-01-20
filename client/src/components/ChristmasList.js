@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
 import ChristmasBackground from "../assets/background_christmas_mobile.jpeg";
-import Container from "../components/Container";
-import Wrapper from "../components/Wrapper";
+import Container from "./Container";
+import Wrapper from "./Wrapper";
 
 export default function ChristmasList({ children }) {
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { deleteListById, getListById, patchListItem } from "../api/lists";
@@ -8,9 +8,8 @@ import DangerButton from "../components/DangerButton";
 import ErrorMessage from "../components/ErrorMessage";
 import Form from "../components/Form";
 import WishListItem from "../components/WishListItem";
-import { theme } from "../GlobalStyle";
-import BirthdayList from "./BirthdayList";
-import ChristmasList from "./ChristmasList";
+import BirthdayList from "../components/BirthdayList";
+import ChristmasList from "../components/ChristmasList";
 
 const WishList = () => {
   const { listId } = useParams();
