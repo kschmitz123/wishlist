@@ -46,11 +46,11 @@ const WishList = () => {
             <ErrorMessage>Error fetching list</ErrorMessage>
           )}
           <h1>Wishlist for: {data?.name}</h1>
-          <p>
+          <div>
             {data?.wishes.map((wish, index) => (
               <WishListItem key={index} title={wish} />
             ))}
-          </p>
+          </div>
           <Form onSubmit={handleSubmit}>
             <input
               placeholder="Add wish"
@@ -76,11 +76,11 @@ const WishList = () => {
             <ErrorMessage>Error fetching list</ErrorMessage>
           )}
           <h1>Wishlist for: {data?.name}</h1>
-          <p>
+          <div>
             {data?.wishes.map((wish, index) => (
               <WishListItem key={index} title={wish} />
             ))}
-          </p>
+          </div>
           <Form onSubmit={handleSubmit}>
             <input
               placeholder="Add wish"
