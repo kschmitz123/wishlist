@@ -6,8 +6,10 @@ const Form = styled.form`
   padding-top: 20px;
 
   input,
-  button {
+  button,
+  select {
     height: 2.5rem;
+    font-size: 1rem;
     border-radius: 25px;
     margin-bottom: 10px;
     border: none;
@@ -15,6 +17,8 @@ const Form = styled.form`
   }
   button {
     background: #e48585;
+    margin-top: 10px;
   }
 `;
+
 export default Form;

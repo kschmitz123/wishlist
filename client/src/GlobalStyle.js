@@ -1,12 +1,16 @@
 import { createGlobalStyle } from "styled-components";
-import ChristmasBackground from "./assets/background_christmas.jpeg";
-import BirthdayBackground from "./assets/background_birthday.jpg";
+import ChristmasBackground from "./assets/background_christmas_mobile.jpeg";
+import BirthdayBackground from "./assets/background_birthday_mobile.jpg";
 
 export const theme = {
   background: {
     standard: `linear-gradient(to top, #6a85b6 0%, #bac8e0 100%)`,
     christmas: `url(${ChristmasBackground}) no-repeat center center fixed`,
     birthday: `url(${BirthdayBackground}) no-repeat center center fixed`,
+  },
+  backgroundColor: {
+    christmas: "#213d5f",
+    birthday: "#cecdcc",
   },
 };
 

@@ -1,32 +1,23 @@
+import React, { useState } from "react";
+import { useMutation, useQuery } from "react-query";
 import { Link, useHistory, useParams } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import { useQuery, useMutation } from "react-query";
-import FloatingActionButton from "../components/Button";
-import Container from "../components/Container";
-import { getListById, deleteListById, patchListItem } from "../api/lists";
-import WishListItem from "../components/WishListItem";
+import { deleteListById, getListById, patchListItem } from "../api/lists";
 import BackArrow from "../assets/back-arrow.png";
+import FloatingActionButton from "../components/Button";
 import DangerButton from "../components/DangerButton";
 import ErrorMessage from "../components/ErrorMessage";
 import Form from "../components/Form";
-import { theme } from "../GlobalStyle";
+import WishListItem from "../components/WishListItem";
+import BirthdayList from "../components/BirthdayList";
+import ChristmasList from "../components/ChristmasList";
 
 const WishList = () => {
   const { listId } = useParams();
   const history = useHistory();
-  const [background, setBackground] = useState("");
   const [wishToAdd, setWishToAdd] = useState("");
   const { data, status } = useQuery(["lists", listId], () =>
     getListById(listId)
   );
-
-  useEffect(() => {
-    if (data?.theme === "christmas") {
-      setBackground(theme.background.christmas);
-    } else {
-      setBackground(theme.background.birthday);
-    }
-  }, [data]);
 
   const mutation = useMutation(() => {
     patchListItem({
@@ -47,38 +38,69 @@ const WishList = () => {
   };
 
   return (
-    <Container
-      style={{
-        background: background,
-      }}
-    >
-      {status === "loading" && <div>Loading...</div>}
-      {status === "error" && <ErrorMessage>Error fetching list</ErrorMessage>}
-
-      <h1>Wishlist for: {data?.name}</h1>
-      <li>
-        {data?.wishes.map((wish, index) => (
-          <WishListItem key={index} title={wish} />
-        ))}
-      </li>
-      <Form onSubmit={handleSubmit}>
-        <input
-          placeholder="Add wish"
-          type="text"
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Add</button>
-      </Form>
-      <DangerButton onClick={handleDelete} type="button">
-        Delete
-      </DangerButton>
-      <Link to="/">
-        <FloatingActionButton>
-          <img src={BackArrow} alt="back" />
-        </FloatingActionButton>
-      </Link>
-    </Container>
+    <>
+      {data && data.theme === "christmas" ? (
+        <ChristmasList>
+          {status === "loading" && <div>Loading...</div>}
+          {status === "error" && (
+            <ErrorMessage>Error fetching list</ErrorMessage>
+          )}
+          <h1>Wishlist for: {data?.name}</h1>
+          <p>
+            {data?.wishes.map((wish, index) => (
+              <WishListItem key={index} title={wish} />
+            ))}
+          </p>
+          <Form onSubmit={handleSubmit}>
+            <input
+              placeholder="Add wish"
+              type="text"
+              onChange={handleChange}
+              required
+            />
+            <button type="submit">Add</button>
+          </Form>
+          <DangerButton onClick={handleDelete} type="button">
+            Delete
+          </DangerButton>
+          <Link to="/">
+            <FloatingActionButton>
+              <img src={BackArrow} alt="back" />
+            </FloatingActionButton>
+          </Link>
+        </ChristmasList>
+      ) : (
+        <BirthdayList>
+          {status === "loading" && <div>Loading...</div>}
+          {status === "error" && (
+            <ErrorMessage>Error fetching list</ErrorMessage>
+          )}
+          <h1>Wishlist for: {data?.name}</h1>
+          <p>
+            {data?.wishes.map((wish, index) => (
+              <WishListItem key={index} title={wish} />
+            ))}
+          </p>
+          <Form onSubmit={handleSubmit}>
+            <input
+              placeholder="Add wish"
+              type="text"
+              onChange={handleChange}
+              required
+            />
+            <button type="submit">Add</button>
+          </Form>
+          <DangerButton onClick={handleDelete} type="button">
+            Delete
+          </DangerButton>
+          <Link to="/">
+            <FloatingActionButton>
+              <img src={BackArrow} alt="back" />
+            </FloatingActionButton>
+          </Link>
+        </BirthdayList>
+      )}
+    </>
   );
 };
 export default WishList;
