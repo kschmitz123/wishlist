@@ -23,7 +23,7 @@ const Welcome = () => {
   return (
     <>
       <Header>
-        <h1>Wishlists</h1>
+        <h1>Wishlists - Heroku test</h1>
       </Header>
       <Wrapper>
         {data?.map((list) => (
