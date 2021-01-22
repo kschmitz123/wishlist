@@ -1,11 +1,11 @@
 export async function getLists() {
-  const response = await fetch("/api/lists");
-  const lists = await response.json();
+  const res = await fetch("/api/lists");
+  const lists = await res.json();
   return lists;
 }
 export async function getListById(id) {
-  const response = await fetch(`/api/lists/${id}`);
-  const list = await response.json();
+  const res = await fetch(`/api/lists/${id}`);
+  const list = await res.json();
   return list;
 }
 export async function deleteListById(id) {
@@ -14,12 +14,12 @@ export async function deleteListById(id) {
   });
 }
 export async function postList(data) {
-  const response = await fetch(`/api/lists/`, {
+  const res = await fetch(`/api/lists/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  const newList = await response.json();
+  const newList = await res.json();
   return newList;
 }
 export async function patchListItem(data) {
